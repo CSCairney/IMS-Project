@@ -67,9 +67,11 @@ public class ItemsDAO implements Dao<Items> {
 	@Override
 	public Items create(Items item) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("INSERT INTO items(item_name, item_price) VALUES('" + item.getItemName() + "','"
-					+ item.getPrice() + "')");
+				PreparedStatement statement = connection
+						.prepareStatement("INSERT INTO items(item_name, item_price) VALUES (?, ?)");) {
+			statement.setString(1, item.getItemName());
+			statement.setDouble(2, item.getPrice());
+			statement.executeUpdate();
 			return readRecent();
 		} catch (Exception e) {
 			LOGGER.debug(e);
@@ -81,9 +83,12 @@ public class ItemsDAO implements Dao<Items> {
 	@Override
 	public Items update(Items item) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("UPDATE items SET item_name ='" + item.getItemName() + "', item_price ='"
-					+ item.getPrice() + "' WHERE item_id =" + item.getId());
+				PreparedStatement statement = connection
+						.prepareStatement("UPDATE items SET item_name = ?, item_price = ? WHERE item_id = ?");) {
+			statement.setString(1, item.getItemName());
+			statement.setDouble(2, item.getPrice());
+			statement.setLong(3,  item.getId());
+			statement.executeUpdate();
 			return read(item.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e);

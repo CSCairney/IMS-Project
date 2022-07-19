@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS `orders`;
 DROP TABLE IF EXISTS `items`;
 DROP TABLE IF EXISTS `order_items`;
 
-CREATE TABLE IF NOT EXISTS `ims`.`customer` (
+CREATE TABLE IF NOT EXISTS `ims`.`customers` (
 	`customer_id` INT PRIMARY KEY AUTO_INCREMENT,
     `customer_firstname` VARCHAR (20) NOT NULL,
     `customer_surname` VARCHAR (20) NOT NULL

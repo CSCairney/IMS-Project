@@ -20,7 +20,7 @@ public class CustomerDAO implements Dao<Customer> {
 
 	@Override
 	public Customer modelFromResultSet(ResultSet resultSet) throws SQLException {
-		Long id = resultSet.getLong("id");
+		Long id = resultSet.getLong("customer_id");
 		String firstName = resultSet.getString("customer_firstname");
 		String surname = resultSet.getString("customer_surname");
 		return new Customer(id, firstName, surname);

@@ -25,6 +25,11 @@ public class Orders {
 		this.itemList = new ArrayList<Items>();
 	}
 	
+	public Orders(Long customerId, List<Items> list) {
+		this.customerId = customerId;
+		this.itemList = list;
+	}
+	
 	public Orders(Long orderId, Long customerId, List<Items> list) {
 		super();
 		this.customerId = customerId;

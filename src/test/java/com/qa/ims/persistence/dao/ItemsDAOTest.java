@@ -1,0 +1,60 @@
+package com.qa.ims.persistence.dao;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import com.qa.ims.persistence.domain.Items;
+import com.qa.ims.utils.DBUtils;
+
+public class ItemsDAOTest {
+
+	private final ItemsDAO DAO = new ItemsDAO();
+
+	@Before
+	public void setup() {
+		DBUtils.connect();
+		DBUtils.getInstance().init("src/test/resources/sql-schema.sql", "src/test/resources/sql-data.sql");
+	}
+
+	@Test
+	public void testCreate() {
+		final Items testMe = new Items(5L, "Car", 100.50);
+		assertEquals(testMe, DAO.create(testMe));
+	}
+
+	@Test
+	public void testReadAll() {
+		List<Items> itemList = new ArrayList<>();
+		itemList.add(new Items(3L, "button", 100.50));
+		assertEquals(itemList, DAO.readAll());
+	}
+
+	@Test
+	public void testRecent() {
+		assertEquals(new Items(1L, "dragon", 200.50), DAO.readRecent());
+	}
+
+	@Test
+	public void testRead() {
+		final long Id = 1L;
+		final Items testMe = new Items(Id, "dragon", 200.50);
+		assertEquals(testMe, DAO.read(Id));
+	}
+	
+	@Test
+	public void testUpdate() {
+		final Items items = new Items(1L, "Car", 200.50);
+		assertEquals(items, DAO.update(items));
+	}
+	
+	@Test
+	public void testDelete() {
+		assertEquals(1, DAO.delete(1));
+	}
+
+}

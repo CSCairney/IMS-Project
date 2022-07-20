@@ -1,43 +1,37 @@
 package com.qa.ims.persistence.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //import java.util.Objects;
 
 public class Orders {
 	private Long customerId;
 	private Long orderId;
-	private Long orderItemsId;
-	private Long itemId;
-	private Double itemPrice;
-	private Double orderCost;
+	private List<Items> itemList;
 	
 	
 	
-	public Orders(Long orderId) {
-		this.orderId = orderId;
+	public Orders(Long customerId) {
+		super();
+		this.customerId = customerId;
+		this.itemList = new ArrayList<Items>();
 	}
 	
 	public Orders(Long orderId, Long customerId) {
-		this.customerId = customerId;
-		this.orderId = orderId;
-	}
-	
-	public Orders(Long customerId, Long orderId, Long orderItemsId) {
-		this.customerId = customerId;
-		this.orderId = orderId;
-		this.orderItemsId = orderItemsId;
-	}
-	
-	public Orders(Long customerId, Long orderId, Long orderItemsId, Long itemId, Double itemPrice,
-			Double orderCost) {
 		super();
 		this.customerId = customerId;
 		this.orderId = orderId;
-		this.orderItemsId = orderItemsId;
-		this.itemId = itemId;
-		this.itemPrice = itemPrice;
-		this.orderCost = orderCost;
+		this.itemList = new ArrayList<Items>();
 	}
 	
+	public Orders(Long orderId, Long customerId, List<Items> list) {
+		super();
+		this.customerId = customerId;
+		this.orderId = orderId;
+		this.itemList = list;
+		
+	}
 	
 	
 	public Long getCustomerId() {
@@ -52,42 +46,18 @@ public class Orders {
 	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
 	}
-	public Long getOrderItemsId() {
-		return orderItemsId;
-	}
-	public void setOrderItemsId(Long orderItemsId) {
-		this.orderItemsId = orderItemsId;
-	}
-	
-	public Long getItemId() {
-		return itemId;
+		
+	public List<Items> getItemList() {
+		return itemList;
 	}
 
-	public void setItemId(Long itemId) {
-		this.itemId = itemId;
+	public void setItemList(List<Items> itemList) {
+		this.itemList = itemList;
 	}
 
-	public Double getItemPrice() {
-		return itemPrice;
-	}
-
-	public void setItemPrice(Double itemPrice) {
-		this.itemPrice = itemPrice;
-	}
-
-	public Double getOrderCost() {
-		return orderCost;
-	}
-
-	public void setOrderCost(Double orderCost) {
-		this.orderCost = orderCost;
-	}
-
-	
 	@Override
 	public String toString() {
-		return "Orders [customerId=" + customerId + ", orderId=" + orderId + ", orderItemsId=" + orderItemsId
-				+ ", itemId=" + itemId + ", itemPrice=" + itemPrice + ", orderCost=" + orderCost + "]";
+		return "Orders [customerId=" + customerId + ", orderId=" + orderId + ", itemList=" + itemList + "]";
 	}
 
 	@Override
@@ -96,10 +66,7 @@ public class Orders {
 		int result = 1;
 		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
 		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
-		result = prime * result + ((orderItemsId == null) ? 0 : orderItemsId.hashCode());
-		result = prime * result + ((itemId == null) ? 0 : itemId.hashCode());
-		result = prime * result + ((itemPrice == null) ? 0 : itemPrice.hashCode());
-		result = prime * result + ((orderCost == null) ? 0 : orderCost.hashCode());
+		result = prime * result + ((itemList == null) ? 0 : itemList.hashCode());
 		return result;
 	}
 
@@ -122,26 +89,12 @@ public class Orders {
 				return false;
 		} else if (!getOrderId().equals(other.getOrderId()))
 			return false;
-		if (getOrderItemsId() == null) {
-			if (other.getOrderItemsId() != null)
+		if (getItemList() == null) {
+			if (other.getItemList() != null)
 				return false;
-		} else if (!getOrderItemsId().equals(other.getOrderItemsId()))
+		} else if (!getItemList().equals(other.getItemList()))
 			return false;
-		if (getItemId() == null) {
-			if (other.getItemId() != null)
-				return false;
-		} else if (!getItemId().equals(other.getItemId()))
-			return false;
-		if (getItemPrice() == null) {
-			if (other.getItemPrice() != null)
-				return false;
-		} else if (!getItemPrice().equals(other.getItemPrice()))
-			return false;
-		if (getOrderCost() == null) {
-			if (other.getOrderCost() != null)
-				return false;
-		} else if (!getOrderCost().equals(other.getOrderCost()))
-			return false;
+		
 		return true;
 	}
 

@@ -18,6 +18,9 @@ public class CustomerDAO implements Dao<Customer> {
 
 	public static final Logger LOGGER = LogManager.getLogger();
 
+	/**
+	 * Model for pulling values of long & string from the MySQL format
+	 */
 	@Override
 	public Customer modelFromResultSet(ResultSet resultSet) throws SQLException {
 		Long id = resultSet.getLong("customer_id");
@@ -48,6 +51,10 @@ public class CustomerDAO implements Dao<Customer> {
 		return new ArrayList<>();
 	}
 
+	/**
+	 * Reads the latest customer added to the database
+	 * @return the results of the format conversion from MySQL
+	 */
 	public Customer readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
@@ -82,6 +89,9 @@ public class CustomerDAO implements Dao<Customer> {
 		return null;
 	}
 
+	/**
+	 * Reads a specific customer from the database based on customerID
+	 */
 	@Override
 	public Customer read(Long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();

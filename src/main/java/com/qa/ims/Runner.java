@@ -7,6 +7,10 @@ public class Runner {
 
 	public static final Logger LOGGER = LogManager.getLogger();
 
+	/**
+	 * Main runner for the Application. Starts by instantiating the IMS class.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		IMS ims = new IMS();
 		ims.imsSystem();

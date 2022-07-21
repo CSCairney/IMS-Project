@@ -9,6 +9,11 @@ import com.qa.ims.persistence.dao.OrdersDAO;
 import com.qa.ims.persistence.domain.Orders;
 import com.qa.ims.utils.Utils;
 
+/**
+ * Takes in Order details for CRUD controller
+ * @author charlesCairney
+ *
+ */
 public class OrderController implements CrudController<Orders> {
 
 	public static final Logger LOGGER = LogManager.getLogger();
@@ -22,6 +27,9 @@ public class OrderController implements CrudController<Orders> {
 		this.utils = utils;
 	}
 
+	/**
+	 * Reads all orders present in the database.
+	 */
 	@Override
 	public List<Orders> readAll() {
 		List<Orders> orders = ordersDAO.readAll();
@@ -31,6 +39,9 @@ public class OrderController implements CrudController<Orders> {
 		return orders;
 	}
 
+	/**
+	 * Creates an order based on the customers input.
+	 */
 	@Override
 	public Orders create() {
 		LOGGER.info("Insert CustomerId for order:");
@@ -41,6 +52,9 @@ public class OrderController implements CrudController<Orders> {
 		return order;
 	}
 
+	/**
+	 * Updates an order based on the customers input.
+	 */
 	@Override
 	public Orders update() {
 		LOGGER.info("Please insert order Id you would like to change:");
@@ -51,6 +65,9 @@ public class OrderController implements CrudController<Orders> {
 		return order;
 	}
 
+	/**
+	 * Deletes an order based on customers input.
+	 */
 	@Override
 	public int delete() {
 		LOGGER.info("Please enter order Id to remove:");
@@ -58,6 +75,10 @@ public class OrderController implements CrudController<Orders> {
 		return ordersDAO.delete(orderId);
 	}
 
+	/**
+	 * Adds an item to an existing order based on user input.
+	 * @return The use of the delete item from order method in ordersDAO
+	 */
 	public int addItem() {
 		LOGGER.info("Please enter which Order Id to ammend item to: ");
 		Long orderId = utils.getLong();
@@ -66,6 +87,10 @@ public class OrderController implements CrudController<Orders> {
 		return ordersDAO.addItemToOrder(orderId, itemId);
 	}
 
+	/**
+	 * Removes an item to an existing order based on user input
+	 * @return calls the remove item method in ordersDAO based on inputs.
+	 */
 	public int deleteItem() {
 		LOGGER.info("Please enter which Order Id to remove item from: ");
 		Long orderId = utils.getLong();
@@ -74,6 +99,10 @@ public class OrderController implements CrudController<Orders> {
 		return ordersDAO.deleteItemFromOrder(orderId, itemId);
 	}
 
+	/**
+	 * Calculates the cost of an order based on user input
+	 * @return sends inputs to the cost of order method in ordersDAO
+	 */
 	public double cost() {
 		LOGGER.info("Please enter Order Id for total cost:");
 		Long orderId = utils.getLong();

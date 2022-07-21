@@ -19,6 +19,9 @@ public class OrdersDAO implements Dao<Orders>{
 	
 	public static final Logger LOGGER = LogManager.getLogger();
 
+	/**
+	 * Reads all the orders present in the database
+	 */
 	@Override
 	public List<Orders> readAll() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -36,6 +39,9 @@ public class OrdersDAO implements Dao<Orders>{
 		return new ArrayList<>();
 	}
 
+	/**
+	 * Reads the order of a specific orderId in the database
+	 */
 	@Override
 	public Orders read(Long orderId) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -52,6 +58,10 @@ public class OrdersDAO implements Dao<Orders>{
 		return null;
 	}
 	
+	/**
+	 * Reads the latest order added to the database
+	 * @return returns the value of the order
+	 */
 	public Orders readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
@@ -65,6 +75,9 @@ public class OrdersDAO implements Dao<Orders>{
 		return null;
 	}
 
+	/**
+	 * Creates a new order in the database
+	 */
 	@Override
 	public Orders create(Orders orders) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -80,6 +93,10 @@ public class OrdersDAO implements Dao<Orders>{
 		return null;
 	}
 
+	/**
+	 * Updates an existing order in the database
+	 * @return the value of this order
+	 */
 	@Override
 	public Orders update(Orders orders) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -96,6 +113,9 @@ public class OrdersDAO implements Dao<Orders>{
 		return null;
 	}
 
+	/**
+	 * Deletes an order based on the orderId selected
+	 */
 	@Override
 	public int delete(long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -109,6 +129,10 @@ public class OrdersDAO implements Dao<Orders>{
 		return 0;
 	}
 
+	/**
+	 * Model for converting MySQL format to java usable code here for Long values.
+	 * @return the order values converted
+	 */
 	@Override
 	public Orders modelFromResultSet(ResultSet resultSet) throws SQLException {
 		Long orderId = resultSet.getLong("order_id");
@@ -117,6 +141,12 @@ public class OrdersDAO implements Dao<Orders>{
 		return new Orders(orderId, customerId, itemList);
 	}
 	
+	/**
+	 * Models the items MySQL format to java usable format from the columns to their Long, String and double format.
+	 * @param resultSet
+	 * @return the item values
+	 * @throws SQLException
+	 */
 	public Items itemFromResultSet(ResultSet resultSet) throws SQLException {
 		Long id = resultSet.getLong("item_id");
 		String itemName = resultSet.getString("item_name");
@@ -124,6 +154,11 @@ public class OrdersDAO implements Dao<Orders>{
 		return new Items(id, itemName, Price);
 	}
 
+	/**
+	 * Gets the list of items based on the orderId
+	 * @param id
+	 * @return The list of items
+	 */
 	public List<Items> getOrderItems(Long id){
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement("SELECT i.item_id, i.item_name, i.item_price "
@@ -145,6 +180,12 @@ public class OrdersDAO implements Dao<Orders>{
 		return new ArrayList<>();
 	}
 	
+	/**
+	 * Adds an item to an existing order
+	 * @param orderId
+	 * @param itemId
+	 * @return returns the list with the new item attached
+	 */
 	public int addItemToOrder(Long orderId, Long itemId) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
@@ -159,6 +200,12 @@ public class OrdersDAO implements Dao<Orders>{
 		return 0;
 	}
 	
+	/**
+	 * Deletes an item from an existing order in the database
+	 * @param orderId
+	 * @param itemId
+	 * @return the new list with the item amended
+	 */
 	public int deleteItemFromOrder(Long orderId, Long itemId) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement("DELETE FROM order_items WHERE fk_order_id = ? AND fk_item_id = ?");) {
@@ -172,6 +219,11 @@ public class OrdersDAO implements Dao<Orders>{
 		return 0;
 	}
 	
+	/**
+	 * Calculates the total cost of items in an order
+	 * @param orderId
+	 * @return Value of total cost in £ format
+	 */
 	public double costOfOrder(Long orderId) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement("SELECT SUM(i.item_price) "

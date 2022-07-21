@@ -1,4 +1,4 @@
-Coverage: 71%
+Coverage: 72%
 # IMS Inventory Management System - By Charles Cairney
 
 This repo is for te creation of an IMS (Inventory Management System) for QA.
@@ -12,10 +12,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 What things you need to install the software and how to install them
 
-Firstly you will need the the Java SE Development kit which can be found here  <br>https://www.oracle.com/java/technologies/downloads/ <br>
-Secondly you will also need a version of MySQL Community including MySQL Workbench  <br>https://dev.mysql.com/downloads/windows/installer/8.0.html <br>
-Finally you will need to have Apache Maven for testing  <br>https://maven.apache.org/download.cgi <br>
- - With Maven you will need two dependencies:  <br>
+You will need the the Java SE Development kit which can be found here  <br>https://www.oracle.com/java/technologies/downloads/ <br>
+You will also need a version of MySQL Community including MySQL Workbench  <br>https://dev.mysql.com/downloads/windows/installer/8.0.html <br>
+You wil need a version of gitbash for terminal access <br>https://git-scm.com/downloads <br>
+You will need to have Apache Maven for testing  <br>https://maven.apache.org/download.cgi <br>
+ - With Maven you will need two dependencies:
          [JUnit](https://mvnrepository.com/artifact/junit/junit) <br>
         [Mockito](https://mvnrepository.com/artifact/org.mockito/mockito-core) <br>
 
@@ -37,6 +38,17 @@ In IMS-Project\src\main\resources you must do the following steps
 db.url=jdbc:mysql://localhost:3306/ims
 db.user="username here" - (if forgotten attempt = root)
 db.password="password here" - (if forgotten attempt = root)
+```
+```
+STEP03:
+Now step 2 is complete open the location where you downloaded the repository folder to.
+ - Right click in the main "IMS-Project" folder and launch "Git Bash Here".
+ - Type mvn clean.
+ - Type mvn package.
+ - Close GitBash terminal.
+ - Move to the "target" folder.
+ - Right click in the folder and launch "Git Bash Here".
+ - Type "java -jar ims-0.0.1-jar-with-dependencies.jar".
 ```
 ### Example of Build
 

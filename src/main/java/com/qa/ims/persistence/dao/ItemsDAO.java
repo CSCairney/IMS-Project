@@ -18,6 +18,9 @@ public class ItemsDAO implements Dao<Items> {
 
 	public static final Logger LOGGER = LogManager.getLogger();
 
+	/**
+	 * Reads all the items in the database
+	 */
 	@Override
 	public List<Items> readAll() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -35,6 +38,10 @@ public class ItemsDAO implements Dao<Items> {
 		return new ArrayList<>();
 	}
 
+	/**
+	 * Reads the most recent item added to the database
+	 * @return the values of the most recent item
+	 */
 	public Items readRecent() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
@@ -48,6 +55,9 @@ public class ItemsDAO implements Dao<Items> {
 		return null;
 	}
 
+	/**
+	 * Reads an item from the database based on the id identified
+	 */
 	@Override
 	public Items read(Long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -64,6 +74,9 @@ public class ItemsDAO implements Dao<Items> {
 		return null;
 	}
 
+	/**
+	 * Creates/sends a statement to create a new item in the database
+	 */
 	@Override
 	public Items create(Items item) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -80,6 +93,9 @@ public class ItemsDAO implements Dao<Items> {
 		return null;
 	}
 
+	/**
+	 * Updates an existing item in the database based on item selected
+	 */
 	@Override
 	public Items update(Items item) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -97,6 +113,9 @@ public class ItemsDAO implements Dao<Items> {
 		return null;
 	}
 
+	/**
+	 * Deletes an existing item in the database based on id selected
+	 */
 	@Override
 	public int delete(long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -110,6 +129,9 @@ public class ItemsDAO implements Dao<Items> {
 		return 0;
 	}
 
+	/**
+	 * Model for converting the information in MySQL into java readible format of Long, String and double here.
+	 */
 	@Override
 	public Items modelFromResultSet(ResultSet resultSet) throws SQLException {
 		Long id = resultSet.getLong("item_id");

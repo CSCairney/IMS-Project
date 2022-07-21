@@ -33,6 +33,11 @@ public class OrdersTest {
 	public void twoConstructorTest() {
 		order = new Orders(orderId, customerId);
 	}
+	
+	@Test
+	public void twoContructorWithArrayListTest() {
+		order = new Orders(customerId, itemList);
+	}
 
 	@Test
 	public void threeConstructorTest() {

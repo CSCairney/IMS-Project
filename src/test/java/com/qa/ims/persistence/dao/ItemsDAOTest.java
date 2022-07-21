@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,6 +21,16 @@ public class ItemsDAOTest {
 		DBUtils.connect();
 		DBUtils.getInstance().init("src/test/resources/sql-schema.sql", "src/test/resources/sql-data.sql");
 	}
+	
+	@After
+	public void clear() {
+		DAO.delete(1L);
+		DAO.delete(2L);
+		DAO.delete(3L);
+		DAO.delete(4L);
+		DAO.delete(5L);
+		
+	}
 
 	@Test
 	public void testCreate() {
@@ -29,9 +40,10 @@ public class ItemsDAOTest {
 
 	@Test
 	public void testReadAll() {
-		List<Items> itemList = new ArrayList<>();
-		itemList.add(new Items(3L, "button", 100.50));
-		assertEquals(itemList, DAO.readAll());
+		List<Items> itemList = new ArrayList<Items>();
+		final Items testMe = new Items(5L, "Car", 100.50);
+		itemList.add(testMe);
+		assertEquals(testMe, DAO.readAll());
 	}
 
 	@Test

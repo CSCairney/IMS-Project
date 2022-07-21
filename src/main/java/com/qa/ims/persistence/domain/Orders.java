@@ -2,6 +2,7 @@ package com.qa.ims.persistence.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 //import java.util.Objects;
 
@@ -67,12 +68,7 @@ public class Orders {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
-		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
-		result = prime * result + ((itemList == null) ? 0 : itemList.hashCode());
-		return result;
+		return Objects.hash(customerId, itemList, orderId);
 	}
 
 	@Override
@@ -84,24 +80,11 @@ public class Orders {
 		if (getClass() != obj.getClass())
 			return false;
 		Orders other = (Orders) obj;
-		if (getCustomerId() == null) {
-			if (other.getCustomerId() != null)
-				return false;
-		} else if (!getCustomerId().equals(other.getCustomerId()))
-			return false;
-		if (getOrderId() == null) {
-			if (other.getOrderId() != null)
-				return false;
-		} else if (!getOrderId().equals(other.getOrderId()))
-			return false;
-		if (getItemList() == null) {
-			if (other.getItemList() != null)
-				return false;
-		} else if (!getItemList().equals(other.getItemList()))
-			return false;
-		
-		return true;
+		return Objects.equals(customerId, other.customerId) && Objects.equals(itemList, other.itemList)
+				&& Objects.equals(orderId, other.orderId);
 	}
+
+	
 
 
 	

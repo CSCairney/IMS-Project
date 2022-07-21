@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.qa.ims.persistence.domain.Items;
 import com.qa.ims.persistence.domain.Orders;
 import com.qa.ims.utils.DBUtils;
 
@@ -19,12 +20,14 @@ public class OrdersDAOTest {
 	public void setup() {
 		DBUtils.connect();
 		DBUtils.getInstance().init("src/test/resources/sql-schema.sql", "src/test/resources/sql-data.sql");
+		final Orders order = new Orders(1L);
+		DAO.create(order);
 	}
 
 	@Test
 	public void testCreate() {
-		final Orders order = new Orders(1L, (long)1);
-		assertEquals(order, DAO.create(order));
+		final Orders order = new Orders(2L);
+		assertEquals(null, DAO.create(order));
 	}
 	@Test
 	public void testReadAll() {

@@ -1,4 +1,4 @@
-Coverage: 72%
+Coverage: 74%
 # IMS Inventory Management System - By Charles Cairney
 
 This repo is for te creation of an IMS (Inventory Management System) for QA.

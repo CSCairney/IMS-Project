@@ -12,11 +12,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.qa.ims.controller.CustomerController;
 import com.qa.ims.controller.OrderController;
-import com.qa.ims.persistence.dao.CustomerDAO;
 import com.qa.ims.persistence.dao.OrdersDAO;
-import com.qa.ims.persistence.domain.Items;
 import com.qa.ims.persistence.domain.Orders;
 import com.qa.ims.utils.Utils;
 
@@ -60,21 +57,21 @@ public class OrdersControllerTest {
 		Mockito.verify(DAO, Mockito.times(1)).readAll();
 	}
 	
-//	@Test
-//	public void testUpdate() {
-//		final long customerId = (long) 4;
-//		final List<Items> orderList = new ArrayList<>();
-//		final Orders order = new Orders(customerId, orderList);
-//
-//		Mockito.when(this.utils.getLong()).thenReturn(customerId);
-//		Mockito.when(mockList.size()).thenReturn(orderList);
-//		Mockito.when(this.DAO.update(order)).thenReturn(order);
-//
-//		assertEquals(order, this.controller.update());
-//
-//		Mockito.verify(this.utils, Mockito.times(1)).getLong();
-//		Mockito.verify(this.DAO, Mockito.times(1)).update(order);
-//	}
+	@Test
+	public void testUpdate() {
+		final Long orderId = 1L, customerId = 2L;
+		final Orders order = new Orders(orderId, customerId);
+
+		Mockito.when(utils.getLong()).thenReturn(orderId, customerId);
+		
+		Mockito.when(DAO.update(order)).thenReturn(order);
+		
+		assertEquals(order, controller.update());
+		
+		Mockito.verify(this.utils, Mockito.times(2)).getLong();
+		Mockito.verify(this.DAO, Mockito.times(1)).update(order);
+		
+	}
 	
 	@Test
 	public void testDelete() {

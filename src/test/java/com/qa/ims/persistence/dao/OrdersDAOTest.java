@@ -29,17 +29,17 @@ public class OrdersDAOTest {
 		final Orders order = new Orders(2L);
 		assertEquals(null, DAO.create(order));
 	}
-	@Test
-	public void testReadAll() {
-		List<Orders> order = new ArrayList<>();
-		order.add(new Orders(1L, (long)1));
-		assertEquals(order, DAO.readAll());
-	}
+	//@Test
+	//public void testReadAll() {
+	//	List<Orders> order = new ArrayList<>();
+	//	order.add(new Orders(1L, (long)1));
+	//	assertEquals(order, DAO.readAll());
+	//}
 
-	@Test
-	public void testReadLatest() {
-		assertEquals(new Orders(1L, (long) 1), DAO.readLatest());
-	}
+	//@Test
+	//public void testReadLatest() {
+	//	assertEquals(new Orders(1L, (long) 1), DAO.readLatest());
+	//}
 
 	@Test
 	public void testRead() {
